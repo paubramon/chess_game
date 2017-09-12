@@ -6,8 +6,8 @@ require './lib/chess/bishop'
 require './lib/chess/knight'
 require './lib/chess/pawn'
 require './lib/chess/chessboard'
+require './lib/chess/chessgame'
 
-chessboard = ChessBoard.new
-chessboard.start_game
-puts "Print chessboard:"
-chessboard.print_board
+chessgame = ChessGame.new
+chessgame.run_game
+

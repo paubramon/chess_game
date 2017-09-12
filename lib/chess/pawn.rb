@@ -5,6 +5,7 @@ class Pawn < Piece
     else
       unicode_symbol = "\u{265F}"
     end
+    @moved = false
     super(x,y,color,:pawn,unicode_symbol)
   end
 end
