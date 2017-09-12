@@ -1,10 +1,10 @@
 class Pawn < Piece
-  #this method prints the unicode symbol of the piece
-  def print_unicode_symbol
-    if @color == :white
-      print "\u{2659}"
+  def initialize(x,y,color)
+    if color == :white
+      unicode_symbol = "\u{2659}"
     else
-      print "\u{265F}"
+      unicode_symbol = "\u{265F}"
     end
+    super(x,y,color,:pawn,unicode_symbol)
   end
 end

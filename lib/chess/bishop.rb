@@ -1,10 +1,10 @@
 class Bishop < Piece
-  #this method prints the unicode symbol of the piece
-  def print_unicode_symbol
-    if @color == :white
-      print "\u{2657}"
+  def initialize(x,y,color)
+    if color == :white
+      unicode_symbol = "\u{2657}"
     else
-      print "\u{265D}"
+      unicode_symbol = "\u{265D}"
     end
+    super(x,y,color,:bishop,unicode_symbol)
   end
 end

@@ -1,11 +1,10 @@
 class Knight < Piece
-
-  #this method prints the unicode symbol of the piece
-  def print_unicode_symbol
-    if @color == :white
-      print "\u{2658}"
+  def initialize(x,y,color)
+    if color == :white
+      unicode_symbol = "\u{2658}"
     else
-      print "\u{265E}"
+      unicode_symbol = "\u{265E}"
     end
+    super(x,y,color,:knight,unicode_symbol)
   end
 end
