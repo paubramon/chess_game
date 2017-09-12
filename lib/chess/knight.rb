@@ -5,6 +5,6 @@ class Knight < Piece
     else
       unicode_symbol = "\u{265E}"
     end
-    super(x,y,color,:knight,unicode_symbol)
+    super(x,y,color,:knight,unicode_symbol,"knight")
   end
 end

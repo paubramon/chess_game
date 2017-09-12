@@ -5,6 +5,6 @@ class King < Piece
     else
       unicode_symbol = "\u{265A}"
     end
-    super(x,y,color,:king,unicode_symbol)
+    super(x,y,color,:king,unicode_symbol,"king")
   end
 end

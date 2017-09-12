@@ -5,6 +5,6 @@ class Bishop < Piece
     else
       unicode_symbol = "\u{265D}"
     end
-    super(x,y,color,:bishop,unicode_symbol)
+    super(x,y,color,:bishop,unicode_symbol,"bishop")
   end
 end

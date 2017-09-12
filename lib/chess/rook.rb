@@ -5,6 +5,6 @@ class Rook < Piece
     else
       unicode_symbol = "\u{265C}"
     end
-    super(x,y,color,:rook,unicode_symbol)
+    super(x,y,color,:rook,unicode_symbol,"rook")
   end
 end

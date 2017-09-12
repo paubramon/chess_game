@@ -6,6 +6,6 @@ class Pawn < Piece
       unicode_symbol = "\u{265F}"
     end
     @moved = false
-    super(x,y,color,:pawn,unicode_symbol)
+    super(x,y,color,:pawn,unicode_symbol,"pawn")
   end
 end

@@ -32,6 +32,66 @@ class ChessBoard
     }
   end
 
+  def make_move(move,color)
+    move_arr = move.split(",")
+    #first of all we will check if the move is correct
+    correct_move = check_move(move_arr,color)
+    if correct_move
+
+      true
+    else
+      false
+    end
+  end
+
+  #this method returns true if the move is correct and false if it isn't
+  def check_move(arr,color)
+    if arr.length < 2
+      puts "You typed an invalid move."
+      return false
+    end
+
+    @current_position = convert_to_position(arr[0])
+    if @current_position.nil?
+      puts "First position invalid. You must specify a position within the board that contains one of your pieces."
+      return false
+    end
+
+    @next_position = convert_to_position(arr[0])
+    if @next_position.nil?
+      puts "Second position invalid. You must specify a position within the board where you want to move your piece."
+      return false
+    end
+
+    current_piece = get_piece(@current_position)
+    if current_piece.nil? || current_piece.color != color
+      puts "First position invalid, it should contain one of your pieces."
+      return false
+    end
+
+    if !current_piece.next_move_correct?(@next_position)
+      puts "Second position invalid, the #{current_piece.name} cannot go to that position"
+      return false
+    end
+  end
+
+  #this method converts a position entered with the format a3, to the array [0,2]
+  def convert_to_position(arr)
+    number_arr = []
+    arr.each_byte{|element| number_arr.unshift(element)}
+    return nil if number_arr.length != 2
+    number_arr[1] = number_arr[1] - 97
+    number_arr[0] = number_arr[0] - 49
+    return nil if !number_arr[0].between?(0,7)
+    return nil if !number_arr[1].between?(0,7)
+    number_arr
+  end
+
+  #given a position, this method returns the piece on that position
+  def get_piece(ary)
+    @board[ary[0]][ary[1]]
+  end
+
   #this method prints the board to show the current situation of the pieces
   def print_board
     #    a   b   c   d   e   f   g   h

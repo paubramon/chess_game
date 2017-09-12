@@ -47,6 +47,7 @@ puts %Q{Choose an option:
   def start_new_game
     puts "\nStart a new game\n"
     @chessboard.start_game
+    print_instructions_message
     @chessboard.print_board
 
     @next_play = :white
@@ -65,6 +66,27 @@ puts %Q{Choose an option:
 
   #this method is the main loop to play the game
   def game_loop
+    loop do
+      next_player = @next_play == :white ? "White" : "Black"
+      puts "#{next_player} player, enter the next move:"
+      next_move = gets.chomp
+      move_done = @chessboard.make_move(next_move,@next_play)
+      if move_done
+        @next_play = @next_play == :white ? :black : :white
+      end
+    end
+  end
 
+  #this method allows the user to save the game.
+  def save_game
+    puts "saved!"
+  end
+
+  #this method prints the instructions to play the game.
+  def print_instructions_message
+    puts %Q{\n\nMake a move by entering two positions on the chess board separated by a space and a comma.
+The first position will be the piece you want to move and the second one will be the move to make.
+Enter a position as a letter then a number. An example position is 'a2' and an example play is 'a2,b3 (read piece on position a2 goes to b3)'.
+Type "save" to save the game.\n\n}
   end
 end

@@ -5,6 +5,6 @@ class Queen < Piece
     else
       unicode_symbol = "\u{265B}"
     end
-    super(x,y,color,:queen,unicode_symbol)
+    super(x,y,color,:queen,unicode_symbol,"queen")
   end
 end
