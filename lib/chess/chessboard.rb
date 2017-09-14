@@ -57,9 +57,14 @@ class ChessBoard
       return false
     end
 
-    @next_position = convert_to_position(arr[0])
+    @next_position = convert_to_position(arr[1])
     if @next_position.nil?
       puts "Second position invalid. You must specify a position within the board where you want to move your piece."
+      return false
+    end
+
+    if @current_position == @next_position
+      puts "The two positions must be different"
       return false
     end
 
@@ -73,6 +78,8 @@ class ChessBoard
       puts "Second position invalid, the #{current_piece.name} cannot go to that position"
       return false
     end
+
+    true
   end
 
   #this method converts a position entered with the format a3, to the array [0,2]

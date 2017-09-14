@@ -14,6 +14,7 @@ class Piece
     print @unicode_symbol
   end
 
+  #this method checks if the given position is reachable by the piece or not
   def next_move_correct?(ary)
     false
   end

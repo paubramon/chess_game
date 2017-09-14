@@ -68,7 +68,7 @@ puts %Q{Choose an option:
   def game_loop
     loop do
       next_player = @next_play == :white ? "White" : "Black"
-      puts "#{next_player} player, enter the next move:"
+      puts "\n#{next_player} player, enter the next move:"
       next_move = gets.chomp
       move_done = @chessboard.make_move(next_move,@next_play)
       if move_done
