@@ -6,10 +6,12 @@ class ChessBoard
 
   def initialize
     @board = Array.new(Board_rows){Array.new(Board_columns)}
+    @number_of_moves = 0
   end
 
   #this method prepares the board for a new game
   def start_game
+    @number_of_moves = 0
     Board_columns.times{|c|
       @board[1][c] = Pawn.new(1,c,:white)
       @board[6][c] = Pawn.new(6,c,:black)
@@ -37,7 +39,7 @@ class ChessBoard
     #first of all we will check if the move is correct
     correct_move = check_move(move_arr,color)
     if correct_move
-
+      @number_of_moves += 1
       true
     else
       false
@@ -46,36 +48,65 @@ class ChessBoard
 
   #this method returns true if the move is correct and false if it isn't
   def check_move(arr,color)
+    #checks if the input of the user is correct
     if arr.length < 2
       puts "You typed an invalid move."
       return false
     end
 
+    #checks if the input of the user is correct
     @current_position = convert_to_position(arr[0])
     if @current_position.nil?
       puts "First position invalid. You must specify a position within the board that contains one of your pieces."
       return false
     end
 
+    #checks if the input of the user is correct
     @next_position = convert_to_position(arr[1])
     if @next_position.nil?
       puts "Second position invalid. You must specify a position within the board where you want to move your piece."
       return false
     end
 
+    #checks the user has not given the same position
     if @current_position == @next_position
       puts "The two positions must be different"
       return false
     end
 
     current_piece = get_piece(@current_position)
+    next_place_piece = get_piece(@next_position)
+
+    #this part checks if the first position contains one of your pieces.
     if current_piece.nil? || current_piece.color != color
       puts "First position invalid, it should contain one of your pieces."
       return false
     end
 
-    if !current_piece.next_move_correct?(@next_position)
+    #this part checks if the piece can do this movement
+    if !current_piece.next_move_correct?(@next_position,!next_place_piece.nil?)
       puts "Second position invalid, the #{current_piece.name} cannot go to that position"
+      return false
+    end
+
+    #checks if next position is empty
+    if !next_place_piece.nil?
+      if next_place_piece.color == color
+        puts "There is already a #{color == :white ? "white" : "black"}"
+        return false
+      end
+    end
+
+    #checks for pieces in the path
+    movement_path = current_piece.path_to_next_position(@next_position)
+    free_path = true
+    movement_path.each{|position|
+      if !get_piece(position).nil?
+        free_path = false
+      end
+    }
+    if !free_path
+      puts "The #{current_piece.name} cannot do this movement. There are pieces in the middle of the path"
       return false
     end
 

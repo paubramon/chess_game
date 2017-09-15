@@ -10,10 +10,10 @@ class Knight < Piece
   end
 
   #this method checks if the given position is reachable by the piece or not
-  def next_move_correct?(ary)
+  def next_move_correct?(ary,attacking = false)
     movement_correct = false
     Possible_moves.each{|move|
-      if (@current_position[0]-move[0]) == ary[0] && (@current_position[1]-move[1]) == ary[1]
+      if (@current_position[0]+move[0]) == ary[0] && (@current_position[1]+move[1]) == ary[1]
         movement_correct = true
         break
       end

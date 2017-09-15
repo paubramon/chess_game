@@ -15,7 +15,12 @@ class Piece
   end
 
   #this method checks if the given position is reachable by the piece or not
-  def next_move_correct?(ary)
+  def next_move_correct?(ary,attacking = false)
     false
+  end
+
+  #this methods returns an array with the positions contained within the path.
+  def path_to_next_position(next_position)
+    []
   end
 end
