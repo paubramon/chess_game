@@ -34,12 +34,16 @@ class ChessBoard
     }
   end
 
+  #this is the generic method to move a piece. It does all the checking and
+  #gets all the necessary data for actually moving the piece.
   def make_move(move,color)
     move_arr = move.split(",")
     #first of all we will check if the move is correct
     correct_move = check_move(move_arr,color)
     if correct_move
       @number_of_moves += 1
+      execute_movement
+      print_board
       true
     else
       false
@@ -113,6 +117,14 @@ class ChessBoard
     true
   end
 
+  #This method moves one piece from @current_position to @next_position. Overriding any
+  #other piece in its way. This method doesn't check if the movement is valid or not.
+  def execute_movement
+    @board[@next_position[0]][@next_position[1]] = @board[@current_position[0]][@current_position[1]]
+    @board[@next_position[0]][@next_position[1]].move_to_position(@next_position)
+    @board[@current_position[0]][@current_position[1]] = nil
+  end
+
   #this method converts a position entered with the format a3, to the array [0,2]
   def convert_to_position(arr)
     number_arr = []
@@ -134,28 +146,28 @@ class ChessBoard
   def print_board
     #    a   b   c   d   e   f   g   h
     #   --- --- --- --- --- --- --- ---
-    #8 | a | a | a | a | a | a | a | a | 8
+    #1 | a | a | a | a | a | a | a | a | 8
     #   --- --- --- --- --- --- --- ---
-    #7 | a | a | a | a | a | a | a | a | 7
+    #2 | a | a | a | a | a | a | a | a | 7
     #   --- --- --- --- --- --- --- ---
-    #6 |   |   |   |   |   |   |   |   | 6
+    #3 |   |   |   |   |   |   |   |   | 6
     #   --- --- --- --- --- --- --- ---
-    #5 |   |   |   |   |   |   |   |   | 5
+    #4 |   |   |   |   |   |   |   |   | 5
     #   --- --- --- --- --- --- --- ---
-    #4 |   |   |   |   |   |   |   |   | 4
+    #5 |   |   |   |   |   |   |   |   | 4
     #   --- --- --- --- --- --- --- ---
-    #3 |   |   |   |   |   |   |   |   | 3
+    #6 |   |   |   |   |   |   |   |   | 3
     #   --- --- --- --- --- --- --- ---
-    #2 | a | a | a | a | a | a | a | a | 2
+    #7 | a | a | a | a | a | a | a | a | 2
     #   --- --- --- --- --- --- --- ---
-    #1 | a | a | a | a | a | a | a | a | 1
+    #8 | a | a | a | a | a | a | a | a | 1
     #   --- --- --- --- --- --- --- ---
     #    a   b   c   d   e   f   g   h
 
     puts "\n\n    a   b   c   d   e   f   g   h"
     puts "   --- --- --- --- --- --- --- ---"
     Board_rows.times{|r|
-      print "#{8-r} | "
+      print "#{r+1} | "
       Board_columns.times{|c|
         if !@board[r][c].nil?
           @board[r][c].print_unicode_symbol
@@ -164,7 +176,7 @@ class ChessBoard
         end
         print " | "
       }
-      print "#{8-r}\n"
+      print "#{r+1}\n"
       puts "   --- --- --- --- --- --- --- ---"
     }
     puts "    a   b   c   d   e   f   g   h\n\n"

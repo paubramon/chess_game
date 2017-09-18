@@ -8,7 +8,6 @@ class Pawn < Piece
     else
       unicode_symbol = "\u{265F}"
     end
-    @moved = false
     super(x,y,color,:pawn,unicode_symbol,"pawn")
   end
 
@@ -20,7 +19,7 @@ class Pawn < Piece
       if (@current_position[0]+move[0]) == ary[0] && (@current_position[1]+move[1]) == ary[1]
         puts @first_move.inspect
         puts move.inspect
-        unless (!@first_move && move == [2,0]) || (!attacking && (move == [1,1] || move == [1,-1]))
+        unless (!@first_move && move[0].abs == 2) || (!attacking && (move[0].abs == move[1].abs))
           movement_correct = true
           break
         end
@@ -28,4 +27,11 @@ class Pawn < Piece
     }
     movement_correct
   end
+
+  #this method moves the piece to another position
+  def move_to_position(next_position)
+    @first_move = false
+    super(next_position)
+  end
+
 end

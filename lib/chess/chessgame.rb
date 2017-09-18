@@ -16,7 +16,7 @@ class ChessGame
 puts %Q{Choose an option:
   1- Start a new game.
   2- Load a saved game.
-  3- Remove a saved game
+  3- Remove a saved games
   4- Quit
 }
   @option = 0

@@ -23,4 +23,9 @@ class Piece
   def path_to_next_position(next_position)
     []
   end
+
+  #this method moves the piece to another position
+  def move_to_position(next_position)
+    @current_position = next_position
+  end
 end
