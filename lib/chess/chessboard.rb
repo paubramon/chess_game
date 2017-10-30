@@ -164,7 +164,7 @@ class ChessBoard
     #   --- --- --- --- --- --- --- ---
     #    a   b   c   d   e   f   g   h
 
-    puts "\n\n    a   b   c   d   e   f   g   h"
+    puts "\n\n    a   b   c   d   e   f   g   i"
     puts "   --- --- --- --- --- --- --- ---"
     Board_rows.times{|r|
       print "#{r+1} | "
@@ -179,6 +179,6 @@ class ChessBoard
       print "#{r+1}\n"
       puts "   --- --- --- --- --- --- --- ---"
     }
-    puts "    a   b   c   d   e   f   g   h\n\n"
+    puts "    a   b   c   d   e   f   g   i\n\n"
   end
 end
