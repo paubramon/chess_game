@@ -179,6 +179,6 @@ class ChessBoard
       print "#{r+1}\n"
       puts "   --- --- --- --- --- --- --- ---"
     }
-    puts "    a   b   c   d   e   f   g   i\n\n"
+    puts "    a   b   c   d   e   f   g   h\n\n"
   end
 end
